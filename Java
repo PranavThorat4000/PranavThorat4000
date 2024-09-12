@@ -1,12 +1,59 @@
-- 👋 Hi, I’m @PranavThorat4000
-- 👀 I’m interested in ...
-- 🌱 I’m currently learning ...
-- 💞️ I’m looking to collaborate on ...
-- 📫 How to reach me ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
 
-<!---
-PranavThorat4000/PranavThorat4000 is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-You can click the Preview link to take a look at your changes.
---->
+import java.util.Scanner;
+
+// Custom exceptions
+class InvalidUsernameException extends Exception {
+    public InvalidUsernameException(String message) {
+        // Just set the error message without using 'super'
+        System.out.println(message);
+    }
+}
+
+class InvalidPasswordException extends Exception {
+    public InvalidPasswordException(String message) {
+        // Just set the error message without using 'super'
+        System.out.println(message);
+    }
+}
+
+// Email class
+class Emailld {
+    String username;
+    String password;
+
+    // Constructor
+    public Emailld(String username, String password) throws InvalidUsernameException, InvalidPasswordException {
+        if (username.length() < 5) {
+            throw new InvalidUsernameException("Username must be at least 5 characters.");
+        }
+        if (password.length() < 8) {
+            throw new InvalidPasswordException("Password must be at least 8 characters.");
+        }
+        this.username = username;
+        this.password = password;
+    }
+
+    // Display method
+    public void display() {
+        System.out.println("Username: " + username);
+        System.out.println("Password: " + password);
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        try {
+            System.out.print("Enter username: ");
+            String username = scanner.nextLine();
+
+            System.out.print("Enter password: ");
+            String password = scanner.nextLine();
+
+            Emailld email = new Emailld(username, password);
+            email.display();
+
+        } catch (InvalidUsernameException | InvalidPasswordException e) {
+            // Exception is already handled in the constructor
+        }
+    }
+}
